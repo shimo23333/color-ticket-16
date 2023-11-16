@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>COLOR STORY IO</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">COLOR STORY IO</div>
+        <div class="sub-title">PIPER</div>
+        <hr>
+        <ul id="color-list" class="row row-cols-3"></ul>
+
+        <hr>
+
+        <div>Input Color Hex To Add New Color</div>
+        <span>#</span>
+        <input id="color-hex-input" type="text" maxlength="6">
+        <button onclick="createColor()">Create</button>
+
+        <div class="footer-title">SARAHANNDESION . CO</div>
+    </div>
+
+    <script>
+        const defaultColor = ['1B3E36', 'A0561F', 'D5BCAE', 'EBE4DD', 'EAE8E4', 'F7F7F5']
+
+        for (let i = 0; i < defaultColor.length; i += 1) {
+            createColor(defaultColor[i]);
+        }
+
+
+        function updateAllColor() {
+            const colorList = document.getElementsByClassName('col');
+
+            for (i = 0; i < colorList.length; i += 1) {
+                // 透過CSS選擇器的方式尋找
+                let color = colorList[i].querySelector('.color');
+                let colorHex = colorList[i].querySelector('.colorHex').innerText;
+                color.style.backgroundColor = `#${colorHex}`;
+            }
+        }
+
+        function createColor(hex) {
+            // 取得輸入框的色碼
+            if (hex === undefined) {
+                hex = document.querySelector('#color-hex-input').value;
+            }
+
+            // 產生出色塊li
+            const li = document.createElement('li');
+            li.className = 'col';
+
+            const colorDiv = document.createElement('div');
+            colorDiv.className = 'color'
+            li.appendChild(colorDiv);
+
+            const colorDivHex = document.createElement('div');
+            colorDivHex.className = 'colorHex';
+            colorDivHex.innerText = hex;
+            li.appendChild(colorDivHex);
+
+            // 放到ul裡面
+            const ul = document.querySelector('#color-list');
+            ul.appendChild(li);
+
+            colorDiv.style.backgroundColor = `#${colorDivHex.innerText}`;
+        }
+    </script>
+</body>
+
+</html>
